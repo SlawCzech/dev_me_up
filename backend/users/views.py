@@ -37,5 +37,10 @@ class GetUserAPIView(RetrieveAPIView):
     serializer_class = serializers.CustomUserSerializer
 
     def retrieve(self, request, *args, **kwargs):
-        serializer = self.serializer_class(request.user)
-        return Response(serializer.data)
+        user_id = kwargs.get('pk')
+        user = get_user_model().objects.filter(id=user_id).first()
+        if user:
+            serializer = self.serializer_class(user)
+            return Response(serializer.data)
+        else:
+            return Response({'detail': 'User not found'}, status=status.HTTP_404_NOT_FOUND)
