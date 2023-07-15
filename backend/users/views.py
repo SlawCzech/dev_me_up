@@ -3,14 +3,22 @@ from rest_framework import status
 from rest_framework.generics import UpdateAPIView, ListAPIView, CreateAPIView, RetrieveAPIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
+from rest_framework.views import APIView
 
 from . import serializers
+from .helpers.nick_generator import generate_nick
 from .permissions import IsAdminOrSelf
 
 
 class CreateUserAPIView(CreateAPIView):
     serializer_class = serializers.CustomUserSerializer
     queryset = get_user_model().objects.all()
+
+
+class CustomNickAPIView(APIView):
+    def get(self, request):
+        nick = generate_nick()
+        return Response(nick, status=status.HTTP_200_OK)
 
 
 class GetUserAPIView(RetrieveAPIView):
