@@ -50,7 +50,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"email\": \"elo@elo.pl\",\n  \"password\": \"elotam\"\n}",
+							"raw": "{\n  \"email\": \"saek@o2.pl\",\n  \"password\": \"krotoszyn\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -135,7 +135,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8000/api/v1/users/5",
+							"raw": "http://localhost:8000/api/v1/users/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -145,7 +145,7 @@
 								"api",
 								"v1",
 								"users",
-								"5"
+								"1"
 							]
 						}
 					},
@@ -176,6 +176,82 @@
 								"api",
 								"v1",
 								"users",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register User",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"saek@pleple234.pl\",\n    \"password\": \"kretik\",\n    \"username\": \"kretik\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/v1/register/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"register",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Activate User",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"saek@pleple2.pl\",\n    \"password\": \"kretik\",\n    \"username\": \"kretik\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://0.0.0.0:8000/api/v1/activate/OQ/brnhi0-2a9b6632d912cd4c92ba4b7945b0e998/",
+							"protocol": "http",
+							"host": [
+								"0",
+								"0",
+								"0",
+								"0"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"activate",
+								"OQ",
+								"brnhi0-2a9b6632d912cd4c92ba4b7945b0e998",
 								""
 							]
 						}
@@ -309,7 +385,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"email\": \"elo@elo.pl\"\n}",
+							"raw": "{\n    \"email\": \"saek@o2.pl\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -382,7 +458,7 @@
 		"bearer": [
 			{
 				"key": "token",
-				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjkwMjExNDkwLCJpYXQiOjE2ODk3Nzk0OTAsImp0aSI6ImRmYzIzZWM0OWU2NjQ0YWFiZDc4YmUxZWE1NmI4OWNmIiwidXNlcl9pZCI6NX0.F9LvtduzM5QsErQjWRgAMP4Rps2zRjbOGkUvo13yLhE",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjkwMzExMDAyLCJpYXQiOjE2ODk4NzkwMDIsImp0aSI6ImE5NjM5NDg5M2JkMzQ0ZjA5YTYzMTcyNjVlNzZhY2E3IiwidXNlcl9pZCI6MX0.oInINXoRGqf-OI9mUXiqvyb8hlGw2dHa5OkXRxv9r_4",
 				"type": "string"
 			}
 		]
