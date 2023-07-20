@@ -9,6 +9,8 @@ from . import views
 
 urlpatterns = [
     path('users/', views.CreateUserAPIView.as_view(), name='create_user'),
+    path('register/', views.RegisterUserAPIView.as_view(), name='register_user'),
+    path('activate/<str:uid>/<str:token>/', views.UserActivationView.as_view(), name='activate_user'),
     path('users/<int:pk>', views.GetUserAPIView.as_view(), name='get_user'),
     path('users/update/', views.UserUpdateAPIView.as_view(), name='update_user'),
     path('users/custom-nick/', views.CustomNickAPIView.as_view(), name='generate_nick'),
