@@ -183,6 +183,38 @@
 					"response": []
 				},
 				{
+					"name": "Create Anonymous User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"elo@elo.pl\",\n    \"password\": \"elotam\",\n    \"username\": \"ELO\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/v1/users/create_anonymous_user/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"create_anonymous_user",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Register User",
 					"request": {
 						"auth": {
@@ -353,7 +385,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjkwMjExMDg5LCJpYXQiOjE2ODk3NzkwODksImp0aSI6IjUwZjc5MTQxNDhjMzRjMjBiMTI2MTliOWNlZWZlNDVkIiwidXNlcl9pZCI6M30.KfkLAtoYDNgIDmnXTYNQLJ00q-vxfd0C-1-AQxG-cI8",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjkwMzcyNjQ0LCJpYXQiOjE2ODk5NDA2NDQsImp0aSI6IjhjYWE3YmJmNzdhMTQ1OTdiYTBiNWU5MGQxMGEzOTMyIiwidXNlcl9pZCI6MX0.-69y6EmiQ3myvlOyGBPCyznn701xT9V4GRalZOBhnY0",
 									"type": "string"
 								}
 							]
@@ -361,7 +393,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8000/api/v1/users/delete/3",
+							"raw": "http://localhost:8000/api/v1/users/delete/2",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -372,7 +404,41 @@
 								"v1",
 								"users",
 								"delete",
-								"3"
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deactivate User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjkwMzcyNjQ0LCJpYXQiOjE2ODk5NDA2NDQsImp0aSI6IjhjYWE3YmJmNzdhMTQ1OTdiYTBiNWU5MGQxMGEzOTMyIiwidXNlcl9pZCI6MX0.-69y6EmiQ3myvlOyGBPCyznn701xT9V4GRalZOBhnY0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/api/v1/users/deactivate/2/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"deactivate",
+								"2",
+								""
 							]
 						}
 					},
@@ -458,7 +524,7 @@
 		"bearer": [
 			{
 				"key": "token",
-				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjkwMzExMDAyLCJpYXQiOjE2ODk4NzkwMDIsImp0aSI6ImE5NjM5NDg5M2JkMzQ0ZjA5YTYzMTcyNjVlNzZhY2E3IiwidXNlcl9pZCI6MX0.oInINXoRGqf-OI9mUXiqvyb8hlGw2dHa5OkXRxv9r_4",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjkwMzcyNjQ0LCJpYXQiOjE2ODk5NDA2NDQsImp0aSI6IjhjYWE3YmJmNzdhMTQ1OTdiYTBiNWU5MGQxMGEzOTMyIiwidXNlcl9pZCI6MX0.-69y6EmiQ3myvlOyGBPCyznn701xT9V4GRalZOBhnY0",
 				"type": "string"
 			}
 		]
