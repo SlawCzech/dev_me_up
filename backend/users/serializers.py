@@ -5,9 +5,9 @@ from rest_framework import serializers
 class CustomUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = get_user_model()
-        fields = ('email', 'password', 'username', 'first_name', 'last_name')
+        fields = ("email", "password", "username", "first_name", "last_name")
         extra_kwargs = {
-            'password': {'write_only': True},
+            "password": {"write_only": True},
         }
 
     def create(self, validated_data):
@@ -32,6 +32,6 @@ class PasswordResetSerializer(serializers.Serializer):
     confirm_password = serializers.CharField(min_length=8)
 
     def validate(self, data):
-        if data['password'] != data['confirm_password']:
+        if data["password"] != data["confirm_password"]:
             raise serializers.ValidationError("Passwords do not match.")
         return data

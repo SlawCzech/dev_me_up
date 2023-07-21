@@ -5,8 +5,12 @@ import random
 def generate_nick(num_results=5):
     directory_path = os.path.dirname(__file__)
     adjectives, nouns = [], []
-    with open(os.path.join(directory_path, 'nick_generator_files', 'adjectives.txt'), 'r') as file_adjective:
-        with open(os.path.join(directory_path, 'nick_generator_files', 'nouns.txt'), 'r') as file_noun:
+    with open(
+        os.path.join(directory_path, "nick_generator_files", "adjectives.txt"), "r"
+    ) as file_adjective:
+        with open(
+            os.path.join(directory_path, "nick_generator_files", "nouns.txt"), "r"
+        ) as file_noun:
             for line in file_adjective:
                 adjectives.append(line.strip())
             for line in file_noun:

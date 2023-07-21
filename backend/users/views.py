@@ -5,7 +5,13 @@ from django.urls import reverse
 from django.utils.encoding import force_bytes, force_str
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from rest_framework import status
-from rest_framework.generics import UpdateAPIView, ListAPIView, CreateAPIView, RetrieveAPIView, DestroyAPIView
+from rest_framework.generics import (
+    UpdateAPIView,
+    ListAPIView,
+    CreateAPIView,
+    RetrieveAPIView,
+    DestroyAPIView,
+)
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -31,12 +37,9 @@ class RegisterUserAPIView(CreateAPIView):
         serializer.is_valid(raise_exception=True)
         user = serializer.save()
 
-        # Generate and send activation link
         uid = urlsafe_base64_encode(force_bytes(user.pk))
         token = default_token_generator.make_token(user)
-        activation_link = reverse('activate_user', kwargs={'uid': uid, 'token': token})
-
-        # Replace the domain with your actual domain
+        activation_link = reverse("activate_user", kwargs={"uid": uid, "token": token})
         activation_link = f"http://0.0.0.0:8000{activation_link}"
 
         send_mail(
@@ -48,7 +51,9 @@ class RegisterUserAPIView(CreateAPIView):
         )
 
         headers = self.get_success_headers(serializer.data)
-        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+        return Response(
+            serializer.data, status=status.HTTP_201_CREATED, headers=headers
+        )
 
 
 class UserActivationView(APIView):
@@ -108,7 +113,7 @@ class PasswordReminderView(APIView):
     def post(self, request):
         serializer = PasswordReminderSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        user = get_user_model().objects.get(email=serializer.validated_data['email'])
+        user = get_user_model().objects.get(email=serializer.validated_data["email"])
 
         uid = urlsafe_base64_encode(force_bytes(user.pk))
         token = default_token_generator.make_token(user)
@@ -149,7 +154,7 @@ class PasswordResetView(APIView):
                 status=status.HTTP_400_BAD_REQUEST,
             )
 
-        user.set_password(serializer.validated_data['password'])
+        user.set_password(serializer.validated_data["password"])
         user.save()
 
         return Response(
