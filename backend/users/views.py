@@ -109,6 +109,31 @@ class DeleteUserAPIView(DestroyAPIView):
     serializer_class = serializers.CustomUserSerializer
 
 
+class UserDeactivationAPIView(APIView):
+    permission_classes = [IsAuthenticated, IsAdminOrSelf]
+
+    def post(self, request, pk):
+        user = get_user_model().objects.filter(id=pk).first()
+
+        if not user:
+            return Response(
+                {"error": "User not found."}, status=status.HTTP_404_NOT_FOUND
+            )
+
+        if user.is_active:
+            user.is_active = False
+            user.save()
+            return Response(
+                {"message": f"{user.username} has been deactivated."},
+                status=status.HTTP_200_OK,
+            )
+        else:
+            return Response(
+                {"message": f"{user.username} is already deactivated."},
+                status=status.HTTP_200_OK,
+            )
+
+
 class PasswordReminderView(APIView):
     def post(self, request):
         serializer = PasswordReminderSerializer(data=request.data)

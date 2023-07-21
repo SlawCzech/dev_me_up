@@ -22,6 +22,11 @@ urlpatterns = [
         "users/delete/<int:pk>", views.DeleteUserAPIView.as_view(), name="delete_user"
     ),
     path(
+        "users/deactivate/<int:pk>/",
+        views.UserDeactivationAPIView.as_view(),
+        name="deactivate_user",
+    ),
+    path(
         "users/password-reset/",
         views.PasswordReminderView.as_view(),
         name="password_reminder",
