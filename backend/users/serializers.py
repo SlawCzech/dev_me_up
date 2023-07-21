@@ -1,5 +1,6 @@
 from django.contrib.auth import get_user_model
 from rest_framework import serializers
+from . import models
 
 
 class CustomUserSerializer(serializers.ModelSerializer):
@@ -35,3 +36,9 @@ class PasswordResetSerializer(serializers.Serializer):
         if data["password"] != data["confirm_password"]:
             raise serializers.ValidationError("Passwords do not match.")
         return data
+
+
+class AnonymousUserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.AnonymousUser
+        fields = "__all__"

@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth import get_user_model
 from django.contrib.auth.admin import UserAdmin
+from .models import AnonymousUser
 
 User = get_user_model()
 
@@ -18,4 +19,12 @@ class UserAdminConfig(UserAdmin):
     list_display = ("email", "username", "is_active", "is_staff")
 
 
+class AnonymousUserAdminConfig(admin.ModelAdmin):
+    model = AnonymousUser
+    list_display = ("id", "created_at")
+    ordering = ("-created_at",)
+    list_filter = ("created_at",)
+
+
 admin.site.register(User, UserAdminConfig)
+admin.site.register(AnonymousUser, AnonymousUserAdminConfig)

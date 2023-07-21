@@ -15,12 +15,11 @@ urlpatterns = [
         views.UserActivationView.as_view(),
         name="activate_user",
     ),
+    path("users/create_anonymous_user/", views.CreateAnonymousUserAPIView.as_view(), name="create_anonymous_user"),
     path("users/<int:pk>", views.GetUserAPIView.as_view(), name="get_user"),
     path("users/update/", views.UserUpdateAPIView.as_view(), name="update_user"),
     path("users/custom-nick/", views.CustomNickAPIView.as_view(), name="generate_nick"),
-    path(
-        "users/delete/<int:pk>", views.DeleteUserAPIView.as_view(), name="delete_user"
-    ),
+    path("users/delete/<int:pk>", views.DeleteUserAPIView.as_view(), name="delete_user"),
     path(
         "users/deactivate/<int:pk>/",
         views.UserDeactivationAPIView.as_view(),

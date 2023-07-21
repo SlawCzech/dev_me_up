@@ -28,6 +28,14 @@ class CreateUserAPIView(CreateAPIView):
     queryset = get_user_model().objects.all()
 
 
+class CreateAnonymousUserAPIView(APIView):
+    def post(self, request):
+        anonymous_user = models.AnonymousUser.objects.create()
+        serializer = serializers.AnonymousUserSerializer(anonymous_user)
+
+        return Response(serializer.data, status=201)
+
+
 class RegisterUserAPIView(CreateAPIView):
     serializer_class = serializers.CustomUserSerializer
     queryset = get_user_model().objects.all()
@@ -51,9 +59,7 @@ class RegisterUserAPIView(CreateAPIView):
         )
 
         headers = self.get_success_headers(serializer.data)
-        return Response(
-            serializer.data, status=status.HTTP_201_CREATED, headers=headers
-        )
+        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
 
 
 class UserActivationView(APIView):
@@ -116,9 +122,7 @@ class UserDeactivationAPIView(APIView):
         user = get_user_model().objects.filter(id=pk).first()
 
         if not user:
-            return Response(
-                {"error": "User not found."}, status=status.HTTP_404_NOT_FOUND
-            )
+            return Response({"error": "User not found."}, status=status.HTTP_404_NOT_FOUND)
 
         if user.is_active:
             user.is_active = False
