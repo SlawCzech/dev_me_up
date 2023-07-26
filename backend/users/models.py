@@ -20,6 +20,7 @@ class CustomUser(AbstractUser):
             "Designates whether this user should be treated as active." "Unselect this instead of deleting accounts."
         ),
     )
+    date_joined = models.DateTimeField(auto_now_add=True, editable=False)
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []

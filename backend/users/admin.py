@@ -17,6 +17,7 @@ class UserAdminConfig(UserAdmin):
     list_filter = ("email", "username", "is_active", "is_staff")
     ordering = ("-last_login",)
     list_display = ("email", "username", "is_active", "is_staff")
+    readonly_fields = ("date_joined",)
 
 
 class AnonymousUserAdminConfig(admin.ModelAdmin):
