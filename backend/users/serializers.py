@@ -3,10 +3,40 @@ from rest_framework import serializers
 from . import models
 
 
-# class UserProfileSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = models.UserProfile
-# fields = ("rank", "games_played", "games_won", "games_lost", "is_search_visible", "is_rank_visible")
+class UserProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.UserProfile
+        exclude = ("user",)
+
+
+class CustomUserCreateSerializer(serializers.ModelSerializer):
+    profile = UserProfileSerializer(required=False)
+
+    class Meta:
+        model = get_user_model()
+        fields = (
+            "id",
+            "email",
+            "username",
+            "password",
+            "profile",
+        )
+        extra_kwargs = {
+            "password": {"write_only": True},
+        }
+
+    def create(self, validated_data):
+        profile_data = validated_data.pop("profile", {})
+        password = validated_data.pop("password")
+
+        if profile_data:
+            custom_user = get_user_model().objects.create_user(password=password, **validated_data)
+            models.UserProfile.objects.create(user=custom_user, **profile_data)
+            custom_user = get_user_model().objects.select_related("profile").get(user_id=custom_user.pk)
+        else:
+            custom_user = get_user_model().objects.create_user(password=password, **validated_data)
+
+        return custom_user
 
 
 class CustomUserSerializer(serializers.ModelSerializer):

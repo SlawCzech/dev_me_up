@@ -9,6 +9,7 @@ from . import views
 
 urlpatterns = [
     path("users/", views.CreateUserAPIView.as_view(), name="create_user"),
+    path("users/profile/", views.CustomUserWithProfileCreateAPIView.as_view(), name="create_user_with_profile"),
     path("register/", views.RegisterUserAPIView.as_view(), name="register_user"),
     path(
         "activate/<str:uid>/<str:token>/",

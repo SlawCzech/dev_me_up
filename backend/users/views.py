@@ -20,12 +20,30 @@ from . import serializers
 from . import models
 from .helpers.nick_generator import generate_nick
 from .permissions import IsAdminOrSelf
-from .serializers import PasswordReminderSerializer, PasswordResetSerializer
+from .serializers import PasswordReminderSerializer, PasswordResetSerializer, CustomUserCreateSerializer
 
 
 class CreateUserAPIView(CreateAPIView):
     serializer_class = serializers.CustomUserSerializer
     queryset = get_user_model().objects.all()
+
+
+class CustomUserWithProfileCreateAPIView(CreateAPIView):
+    queryset = get_user_model().objects.all()
+    serializer_class = CustomUserCreateSerializer
+
+    def create(self, request, *args, **kwargs):
+        custom_user_data = request.data.copy()
+        profile_data = custom_user_data.pop("profile", {})
+
+        serializer = self.get_serializer(data=custom_user_data)
+        serializer.is_valid(raise_exception=True)
+
+        custom_user = serializer.save()
+        models.UserProfile.objects.create(user=custom_user, **profile_data)
+
+        headers = self.get_success_headers(serializer.data)
+        return Response(serializer.data, status=201, headers=headers)
 
 
 class CreateAnonymousUserAPIView(APIView):
