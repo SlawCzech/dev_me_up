@@ -1,5 +1,6 @@
 import uuid
 
+from django.contrib.auth import get_user_model
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.utils.translation import gettext_lazy as _
@@ -26,7 +27,7 @@ class CustomUser(AbstractUser):
     REQUIRED_FIELDS = []
 
     def __str__(self):
-        return self.email
+        return self.username
 
 
 class AnonymousUser(models.Model):
@@ -35,3 +36,18 @@ class AnonymousUser(models.Model):
 
     def __str__(self):
         return f"Anonymous user {self.id}"
+
+
+class UserProfile(models.Model):
+    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, related_name="profile")
+    rank = models.IntegerField(default=0)
+    games_played = models.IntegerField(default=0)
+    games_won = models.IntegerField(default=0)
+    games_lost = models.IntegerField(default=0)
+    is_online = models.BooleanField(default=False)
+    is_bot = models.BooleanField(default=False)
+    is_search_visible = models.BooleanField(default=False)
+    is_rank_visible = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"Profile of {self.user}"
